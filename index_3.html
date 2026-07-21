@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Enfermagem — Plantão 24x7 | Pipo Saúde</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f3;color:#1a1a1a}
+.top-bar{background:#1a1a1a;color:#fff;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top-bar-title{font-size:14px;font-weight:600}
+.top-bar-meta{font-size:11px;color:#aaa;text-align:right;line-height:1.6}
+.top-bar-meta a{color:#7eb8f7;text-decoration:none}
+.tabs-wrap{background:#fff;border-bottom:1px solid #e5e5e3;position:sticky;top:0;z-index:99;overflow-x:auto}
+.tabs{display:flex;padding:0 16px;min-width:max-content}
+.tab{padding:9px 14px;font-size:12px;cursor:pointer;color:#888;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:all .15s}
+.tab.active{color:#1a1a1a;border-bottom-color:#1a1a1a;font-weight:500}
+.tab:hover:not(.active){color:#555}
+.content{padding:16px;max-width:800px;margin:0 auto}
+.panel{display:none}.panel.active{display:block}
+.search{width:100%;padding:11px 14px;font-size:14px;border:1px solid #e5e5e3;border-radius:10px;background:#fff;margin-bottom:14px}
+.search:focus{outline:none;border-color:#999}
+.card{border:1px solid #e5e5e3;border-radius:10px;margin-bottom:9px;overflow:hidden;background:#fff}
+.card-header{padding:11px 14px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:10px}
+.card-header:hover{background:#fafafa}
+.card-title{font-size:13px;font-weight:500;display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;font-weight:500;flex-shrink:0}
+.badge-red{background:#fde8e8;color:#c0392b}
+.badge-amber{background:#fef3e2;color:#b7550a}
+.badge-green{background:#e8f5e9;color:#2e7d32}
+.badge-gray{background:#f0f0ee;color:#555;border:1px solid #e5e5e3}
+.badge-blue{background:#e8f0fe;color:#1a56b0}
+.chevron{font-size:10px;color:#ccc;transition:transform .2s;flex-shrink:0}
+.chevron.open{transform:rotate(180deg)}
+.card-body{padding:14px;display:none;border-top:1px solid #f0f0ee}
+.card-body.open{display:block}
+.steps{list-style:none}
+.steps li{display:flex;gap:9px;margin-bottom:9px;font-size:13px;line-height:1.5}
+.sn{min-width:22px;height:22px;border-radius:50%;background:#e8f0fe;color:#1a56b0;font-size:10px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.ok{min-width:22px;height:22px;border-radius:50%;background:#e8f5e9;color:#2e7d32;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.no{min-width:22px;height:22px;border-radius:50%;background:#fde8e8;color:#c0392b;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.alert{padding:10px 12px;border-radius:8px;margin-bottom:11px;font-size:13px;line-height:1.5;border-left:3px solid}
+.alert-red{background:#fde8e8;color:#c0392b;border-left-color:#c0392b}
+.alert-amber{background:#fef3e2;color:#b7550a;border-left-color:#e67e22}
+.alert-green{background:#e8f5e9;color:#2e7d32;border-left-color:#2e7d32}
+.alert-blue{background:#e8f0fe;color:#1a56b0;border-left-color:#1a56b0}
+.qs{background:#fafafa;border-radius:8px;padding:11px;margin-top:11px}
+.qs-title{font-size:11px;font-weight:600;color:#888;margin-bottom:7px;text-transform:uppercase;letter-spacing:.05em}
+.q{font-size:13px;padding:5px 0;border-bottom:1px solid #f0f0ee;line-height:1.4}
+.q:last-child{border-bottom:none}
+.sec{font-size:11px;font-weight:600;color:#aaa;text-transform:uppercase;letter-spacing:.08em;margin:18px 0 9px;padding-bottom:5px;border-bottom:1px solid #f0f0ee}
+.sec:first-child{margin-top:0}
+.textarea{width:100%;min-height:140px;padding:9px 12px;font-size:13px;border:1px solid #e5e5e3;border-radius:8px;resize:vertical;font-family:inherit;line-height:1.6}
+.textarea:focus{outline:none;border-color:#999}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;margin-bottom:12px}
+.tag{font-size:12px;padding:4px 11px;border-radius:99px;background:#f5f5f3;border:1px solid #e5e5e3;color:#555;cursor:pointer;transition:all .15s}
+.tag.selected{background:#e8f0fe;color:#1a56b0;border-color:#aac4f5}
+.btn{padding:8px 18px;font-size:13px;font-weight:500;border-radius:8px;border:1px solid #e5e5e3;background:#fff;color:#1a1a1a;cursor:pointer;transition:all .15s;margin-top:8px}
+.btn:hover{background:#f5f5f3}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.output{background:#fafafa;border:1px solid #e5e5e3;border-radius:10px;padding:14px;margin-top:12px;font-size:13px;line-height:1.8;white-space:pre-wrap;display:none}
+.output.show{display:block}
+.fl{font-size:12px;font-weight:500;color:#888;margin-bottom:5px;display:block;text-transform:uppercase;letter-spacing:.05em;margin-top:12px}
+.dots{display:inline-flex;gap:4px;margin-left:6px;vertical-align:middle}
+.dot{width:4px;height:4px;border-radius:50%;background:#888;animation:bounce .8s infinite}
+.dot:nth-child(2){animation-delay:.15s}.dot:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}}
+
+/* REDE */
+.op-card{background:#fff;border:1px solid #e5e5e3;border-radius:10px;padding:14px;margin-bottom:10px}
+.op-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+.op-name{font-size:15px;font-weight:600}
+.op-desc{font-size:12px;color:#888;margin-top:2px;line-height:1.4}
+.op-btns{display:flex;gap:7px;flex-wrap:wrap;flex-shrink:0}
+.op-btn{padding:6px 12px;font-size:12px;font-weight:500;border-radius:8px;text-decoration:none;cursor:pointer;border:none;white-space:nowrap}
+.op-btn-primary{background:#1a56b0;color:#fff}
+.op-btn-primary:hover{background:#154a9a}
+.op-btn-copy{background:#f0f0ee;color:#333;border:1px solid #e5e5e3}
+.op-btn-copy:hover{background:#e5e5e3}
+.op-btn-copy.copied{background:#e8f5e9;color:#2e7d32}
+.op-tel{font-size:12px;color:#666;margin-top:8px;padding-top:8px;border-top:1px solid #f0f0ee;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.op-tel strong{color:#333}
+.op-tel .tel-copy{font-size:11px;padding:3px 8px;border-radius:6px;background:#f0f0ee;border:1px solid #e5e5e3;cursor:pointer;color:#555}
+.op-tel .tel-copy.copied{background:#e8f5e9;color:#2e7d32}
+.op-steps{margin-top:10px;padding-top:10px;border-top:1px solid #f0f0ee;display:none}
+.op-steps.show{display:block}
+.op-steps-toggle{font-size:11px;color:#1a56b0;cursor:pointer;background:none;border:none;padding:0;margin-top:6px}
+
+.msg-text{background:#f5f5f3;border-radius:8px;padding:11px 13px;font-size:13px;line-height:1.7;white-space:pre-wrap}
+.copy-msg{font-size:11px;margin-top:7px;padding:4px 12px}
+
+.link-row{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid #f0f0ee;flex-wrap:wrap}
+.link-row:last-child{border-bottom:none}
+.link-row-label{flex:1;min-width:120px}
+.link-row-label strong{font-size:13px;display:block}
+.link-row-label span{font-size:11px;color:#888}
+.link-row-btns{display:flex;gap:6px;flex-shrink:0}
+.lbtn{padding:6px 12px;font-size:12px;font-weight:500;border-radius:8px;text-decoration:none;white-space:nowrap;border:none;cursor:pointer}
+.lbtn-primary{background:#1a56b0;color:#fff}
+.lbtn-primary:hover{background:#154a9a}
+.lbtn-copy{background:#f0f0ee;color:#333;border:1px solid #e5e5e3}
+.lbtn-copy:hover{background:#e5e5e3}
+.lbtn-copy.copied{background:#e8f5e9;color:#2e7d32}
+
+.footer{background:#1a1a1a;color:#888;font-size:11px;padding:16px 20px;text-align:center;margin-top:24px;line-height:1.7}
+.footer a{color:#7eb8f7;text-decoration:none}
+.chat-item{border-radius:10px;padding:14px;margin-bottom:10px;font-size:13px;line-height:1.6;}
+.chat-item.enfermeiro{background:#e8f0fe;border-left:3px solid #1a56b0;}
+.chat-item.paciente{background:#f5f5f3;border-left:3px solid #888;}
+.chat-item-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;color:#888;}
+.chat-item.enfermeiro .chat-item-label{color:#1a56b0;}
+.chat-section{margin-bottom:10px;}
+.chat-section-title{font-size:11px;font-weight:700;text-transform:uppercase;color:#aaa;letter-spacing:.06em;margin-bottom:6px;}
+.chat-copy-btn{font-size:11px;padding:4px 10px;border-radius:6px;background:#f0f0ee;border:1px solid #e5e5e3;cursor:pointer;margin-top:6px;color:#555;}
+.chat-copy-btn:hover{background:#e5e5e3;}
+.chat-copy-btn.copied{background:#e8f5e9;color:#2e7d32;}
+.chat-link-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:8px;background:#1a56b0;color:#fff;font-size:12px;cursor:pointer;border:none;margin:3px 3px 3px 0;}
+.chat-link-pill.copied{background:#2e7d32;}
+.chat-ps{background:#fde8e8;color:#c0392b;border-radius:8px;padding:10px 12px;font-size:13px;font-weight:600;margin-top:8px;}
+.chat-warning{background:#fef3e2;color:#b7550a;border-radius:8px;padding:10px 12px;font-size:12px;margin-top:8px;border-left:3px solid #e67e22;}
+
+/* TRIAGEM RESULTADO */
+.triagem-result{background:#fff;border:1px solid #e5e5e3;border-radius:12px;padding:18px;margin-bottom:12px}
+.triagem-result-title{font-size:17px;font-weight:700;margin-bottom:14px;color:#1a1a1a}
+.triagem-block{margin-bottom:14px}
+.triagem-block-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:#aaa;margin-bottom:8px}
+.triagem-dirs{display:flex;flex-direction:column;gap:6px;margin-top:4px}
+.triagem-dir{font-size:13px;padding:8px 12px;border-radius:8px;display:flex;align-items:flex-start;gap:10px}
+.triagem-dir.red{background:#fde8e8;color:#c0392b}
+.triagem-dir.amber{background:#fef3e2;color:#b7550a}
+.triagem-dir.green{background:#e8f5e9;color:#2e7d32}
+.triagem-dir.gray{background:#f5f5f3;color:#555}
+.triagem-link{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:12px;padding:5px 12px;border-radius:8px;background:#1a56b0;color:#fff;text-decoration:none;cursor:pointer;border:none}
+.triagem-link.copy{background:#f0f0ee;color:#333;border:1px solid #e5e5e3}
+.triagem-link.copied{background:#e8f5e9;color:#2e7d32}
+.triagem-alerta{background:#fde8e8;border-left:3px solid #c0392b;border-radius:8px;padding:10px 12px;font-size:13px;color:#c0392b;margin-top:10px}
+.triagem-caso{background:#f5f5f3;border-radius:8px;padding:12px;margin-top:10px;font-size:13px;line-height:1.6}
+.triagem-caso-title{font-size:11px;font-weight:700;text-transform:uppercase;color:#888;margin-bottom:6px}
+.multi-btn{display:block;width:100%;text-align:left;padding:10px 14px;margin-bottom:6px;border:1px solid #e5e5e3;border-radius:8px;background:#fff;font-size:13px;cursor:pointer;transition:all .15s}
+.multi-btn:hover{background:#f5f5f3}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-title">Guia de Enfermagem — Plantão 24x7 | Pipo Saúde</div>
+  <div class="top-bar-meta">
+    Material de apoio fora do horário comercial<br>
+    Criado por <strong style="color:#fff">Letícia Rodrigues</strong> · Enfermeira Pipo Saúde<br>
+    <a href="mailto:leticia.rodrigues@piposaude.com.br">leticia.rodrigues@piposaude.com.br</a> &nbsp;|&nbsp;
+    <a href="https://piposaude.slack.com/team/U0B1GUWNF9S">Slack</a>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('triagem')">Assistente</button>
+    <button class="tab" onclick="showTab('links')">Links rápidos</button>
+    <button class="tab" onclick="showTab('mensagens')">Modelos</button>
+    <button class="tab" onclick="showTab('relatorio')">Gerar evolução</button>
+    <button class="tab" onclick="showTab('rede')">Rede e Telefones</button>
+    <button class="tab" onclick="showTab('operadoras')">Telemedicina 24h</button>
+    <button class="tab" onclick="showTab('dicas')">Fluxo 24x7 e Dicas</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- TRIAGEM -->
+<div id="panel-triagem" class="panel active">
+  <div class="alert alert-red" style="margin-bottom:10px;"><strong>Conduta final é sempre responsabilidade do enfermeiro.</strong> A IA sugere — você decide.</div>
+
+  <div class="sec">Analisar atendimento com IA</div>
+  <div class="card">
+    <div class="card-body open" style="display:block;">
+      <span class="fl" style="margin-top:0;">Cole aqui o que o paciente relatou (pode ser tudo de uma vez)</span>
+      <textarea class="textarea" id="msg-paciente" placeholder="Ex: estou com febre desde ontem, dor de cabeça forte, vômito e tontura. Tomei dipirona mas não melhorou..." style="min-height:120px;"></textarea>
+      <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;">
+        <button class="btn" onclick="analisar()" id="btn-analisar" style="background:#1a1a1a;color:#fff;border-color:#1a1a1a;">Analisar e gerar conduta</button>
+        <button class="btn" onclick="limparChat()" style="font-size:12px;">Limpar conversa</button>
+      </div>
+      <span id="loading-ass" style="display:none;font-size:13px;color:#888;margin-left:10px;">Analisando<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></span>
+    </div>
+  </div>
+
+  <div id="chat-historico" style="margin-top:4px;"></div>
+
+  <div id="continuar-area" style="display:none;">
+    <div class="sec">Paciente respondeu? Cole aqui para nova análise</div>
+    <div class="card">
+      <div class="card-body open" style="display:block;">
+        <textarea class="textarea" id="msg-continuacao" placeholder="Cole aqui o que o paciente respondeu..." style="min-height:80px;"></textarea>
+        <button class="btn" onclick="continuar()" style="margin-top:8px;background:#1a1a1a;color:#fff;border-color:#1a1a1a;">Analisar nova resposta</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec" style="margin-top:24px;">Busca rápida por sintoma</div>
+  <div class="alert alert-blue" style="margin-bottom:10px;">Prefere buscar manualmente? Digite o sintoma abaixo.</div>
+  <input class="search" type="text" id="search-triagem" placeholder="Digite o sintoma (ex: febre, vômito, ansiedade...)" oninput="buscaTriagem()">
+  <div id="triagem-hint" style="font-size:12px;color:#888;margin-top:-8px;margin-bottom:14px;">Sem vaga na enfermagem? Encaminhe para médica com o mesmo tempo.</div>
+  <div id="triagem-multi" style="display:none;"></div>
+  <div id="triagem-result" style="display:none;"></div>
+  <div id="triagem-empty" style="display:none;text-align:center;padding:40px;color:#888;font-size:13px;">Nenhum resultado. Tente outras palavras.</div>
+  <div id="triagem-lista">
+    <div class="alert alert-amber"><strong>Legenda:</strong> C.E. = Consulta Enfermagem &nbsp;|&nbsp; C.M. = Consulta Médica &nbsp;|&nbsp; D.E. = Demanda Espontânea (mesmo dia)</div>
+  </div>
+</div>
+
+
+<!-- LINKS RÁPIDOS -->
+<div id="panel-links" class="panel">
+  <div class="alert alert-blue">Links diretos para uso durante o plantão.</div>
+
+  <div class="sec">Teleconsulta — Enfermagem</div>
+  <div class="link-row"><div class="link-row-label"><strong>Enfermagem 15 minutos</strong><span>Febre &lt;72h, sintomas gripais, demanda leve</span></div><div class="link-row-btns"><a href="https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min')">Copiar</button></div></div>
+  <div class="link-row"><div class="link-row-label"><strong>Enfermagem 30 minutos</strong><span>Sintoma eletivo, saúde mental, acompanhamento</span></div><div class="link-row-btns"><a href="https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min')">Copiar</button></div></div>
+
+  <div class="sec">Teleconsulta — Médica</div>
+  <div class="link-row"><div class="link-row-label"><strong>Médica 15 minutos</strong><span>ITU, enxaqueca, demanda aguda com chance de prescrição</span></div><div class="link-row-btns"><a href="https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1')">Copiar</button></div></div>
+  <div class="link-row"><div class="link-row-label"><strong>Médica 30 minutos</strong><span>Sintoma eletivo com necessidade médica</span></div><div class="link-row-btns"><a href="https://calendly.com/d/cxpv-k4h-8v5/teleconsulta-medica-pipo-saude-2" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://calendly.com/d/cxpv-k4h-8v5/teleconsulta-medica-pipo-saude-2')">Copiar</button></div></div>
+
+  <div class="sec">Sistemas</div>
+  <div class="link-row"><div class="link-row-label"><strong>Backoffice Pipo</strong><span>Dados do membro, carteirinha</span></div><div class="link-row-btns"><a href="https://backoffice.piposaude.com.br" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://backoffice.piposaude.com.br')">Copiar</button></div></div>
+  <div class="link-row"><div class="link-row-label"><strong>Zendesk</strong><span>Fila de tickets</span></div><div class="link-row-btns"><a href="https://piposaude.zendesk.com/agent/" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://piposaude.zendesk.com/agent/')">Copiar</button></div></div>
+  <div class="link-row"><div class="link-row-label"><strong>Squadcast</strong><span>App de acionamento</span></div><div class="link-row-btns"><a href="https://app.squadcast.com" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://app.squadcast.com')">Copiar</button></div></div>
+  <div class="link-row"><div class="link-row-label"><strong>Pipo Cuida</strong><span>Plataforma do membro</span></div><div class="link-row-btns"><a href="https://membro.piposaude.com.br/#/login" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://membro.piposaude.com.br/#/login')">Copiar</button></div></div>
+  <div class="link-row"><div class="link-row-label"><strong>ABRAMGE</strong><span>Rede nacional de emergência</span></div><div class="link-row-btns"><a href="https://atendimentoabramge.com.br/#/home/service-locations" target="_blank" class="lbtn lbtn-primary">Abrir</a><button class="lbtn lbtn-copy" onclick="copyLink(this,'https://atendimentoabramge.com.br/#/home/service-locations')">Copiar</button></div></div>
+
+  <div class="sec">Contatos de emergência</div>
+  <div class="link-row"><div class="link-row-label"><strong>CEATOX</strong><span>Reação a medicamento não prescrito pela Pipo</span></div><div class="link-row-btns"><button class="lbtn lbtn-copy" onclick="copyTel(this,'0800-0148110')">Copiar 0800-0148110</button></div></div>
+  <div class="link-row"><div class="link-row-label"><strong>CVV</strong><span>Crise de saúde mental / ideação suicida</span></div><div class="link-row-btns"><button class="lbtn lbtn-copy" onclick="copyTel(this,'188')">Copiar 188</button></div></div>
+</div>
+
+<!-- MODELOS -->
+<div id="panel-mensagens" class="panel">
+  <div class="sec">Abertura</div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Apresentação inicial</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Olá, [Nome]! Tudo bem? Meu nome é [seu nome], sou enfermeira do time de saúde da Pipo. Vi que você está com [motivo]. Pode me contar mais sobre o que está sentindo?</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="sec">Triagem de dor</div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Perguntas para dor</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">De 0 a 10, sendo 0 nenhuma dor e 10 a pior dor possível, como você classificaria a intensidade agora?
+
+Tem febre? Está sentindo mais algum sintoma junto?
+
+H� quanto tempo está assim? Tomou alguma medicação?</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="sec">Encaminhamento para PS</div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Orientar PS — sinal de alerta</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Imagino como essa situação está difícil. Com os sintomas que está descrevendo, o mais indicado é uma avaliação presencial — pela teleconsulta não conseguimos oferecer o atendimento necessário com segurança.
+
+Recomendo que vá ao pronto-socorro ou pronto atendimento o quanto antes. Posso te ajudar a encontrar um que aceite seu plano?</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Paciente resistindo a ir ao PS</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Entendo o cansaço e a dificuldade de se deslocar. Mas preciso ser transparente: seu caso exige avaliação médica presencial com segurança. Procure qualquer UPA ou pronto atendimento mais próximo agora.</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="sec">Teleconsulta</div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Encaminhar para teleconsulta</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Para te ajudar da melhor forma, vou te encaminhar para uma teleconsulta com nossa equipe. Segue o link:
+
+[LINK]
+
+Você escolhe o melhor horário. Qualquer dúvida estou aqui!</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="sec">Conforto domiciliar</div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Garganta / viral</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Enquanto aguarda atendimento:
+• Hidratação constante
+• Repouso, evite esforço físico
+• Refeições leves
+• Gargarejos com água morna e sal, 3x ao dia
+
+Fique atento a: febre persistente, falta de ar, piora da dor. Se aparecer, procure avaliação presencial.</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Gastroenterite leve</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Algumas orientações:
+• Hidratação constante — água, água de coco, soro oral
+• Evite alimentos gordurosos, fritos ou crus
+• Prefira: arroz, batata cozida, banana
+• Repouso
+
+Atenção: vômitos muito frequentes, febre alta, tontura intensa ou sangue nas fezes → procure avaliação presencial.</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="sec">Encerramento</div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Finalizar atendimento</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Fico feliz em ter ajudado! Estou finalizando seu atendimento, mas caso precise novamente é só nos acionar. Melhoras!</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title">Sem retorno do paciente</span><span class="chevron">▼</span></div><div class="card-body"><div class="msg-text">Realizei tentativa de contato às [HORA] sem sucesso. Devido à falta de resposta, estou encerrando o atendimento. Caso precise, é só nos acionar novamente.</div><button class="btn copy-msg" onclick="copyMsg(this)">Copiar</button></div></div>
+</div>
+
+<!-- GERAR EVOLUÇÃO -->
+<div id="panel-relatorio" class="panel">
+  <div class="alert alert-blue">Cole a transcrição, preencha os campos e gere a evolução pronta para copiar no Nilo.</div>
+
+  <span class="fl">Número do ticket Zendesk</span>
+  <input type="text" id="ticket-id" class="search" placeholder="Ex: 123456" style="margin-bottom:14px;">
+
+  <span class="fl">Transcrição do atendimento</span>
+  <textarea class="textarea" id="transcricao" placeholder="Cole aqui a transcrição do chat com o paciente..."></textarea>
+
+  <span class="fl">Tipo de atendimento</span>
+  <div class="tags">
+    <span class="tag" onclick="selectTag(this,'tipo')">Clínico / sintoma</span>
+    <span class="tag" onclick="selectTag(this,'tipo')">Saúde mental</span>
+    <span class="tag" onclick="selectTag(this,'tipo')">Busca de rede</span>
+    <span class="tag" onclick="selectTag(this,'tipo')">Internação / liberação</span>
+    <span class="tag" onclick="selectTag(this,'tipo')">Administrativo</span>
+  </div>
+
+  <span class="fl">Desfecho do atendimento</span>
+  <div class="tags">
+    <span class="tag" onclick="selectTag(this,'desfecho')">Consulta APS presencial</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Atendimento com sucesso</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Encaminhamento para PS</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Encaminhamento para médico especialista</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Encaminhamento especialidade focal presencial</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Encaminhamento médico especialista credenciado</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Encaminhamento para time de cuidado</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Internação</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Recusa</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Renovação de receita</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Retorno</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Terapia</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Sem retorno após protocolo</span>
+    <span class="tag" onclick="selectTag(this,'desfecho')">Escalado para chefia</span>
+  </div>
+
+  <div class="alert alert-amber" style="margin-top:4px;"><strong>Campos fixos do Nilo:</strong> Origem: Acolhimento &nbsp;|&nbsp; Canal: Ferramenta oficial de chat &nbsp;|&nbsp; Desfecho: conforme seleção acima</div>
+
+  <button class="btn" onclick="gerar()" id="btn-gerar">Gerar evolução para o Nilo</button>
+  <span id="loading" style="display:none;font-size:13px;color:#888;margin-left:10px;">Gerando<span class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></span>
+  <div class="output" id="output"></div>
+  <button class="btn" id="btn-copy" style="display:none;font-size:12px;margin-top:8px;" onclick="copiar()">Copiar para o Nilo</button>
+</div>
+
+<!-- REDE E TELEFONES -->
+<div id="panel-rede" class="panel">
+  <div class="alert alert-blue">Links + telefones de todas as operadoras em um lugar só.</div>
+  <div class="alert alert-amber">Fora do horário comercial: busca de rede somente para pronto-socorro. Remova a quilometragem antes de enviar ao membro.</div>
+
+  <div class="sec">Operadoras</div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Hapvida</div><div class="op-desc">CPF + data de nascimento → selecionar código ativo → filtrar</div></div><div class="op-btns"><a href="https://www.hapvida.com.br/pls/webhap/webnewredecredenciada.selecionarede" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www.hapvida.com.br/pls/webhap/webnewredecredenciada.selecionarede')">Copiar link</button></div></div>
+    <div class="op-tel"><strong>SAC:</strong> 0800-280-9130 <button class="tel-copy" onclick="copyTel(this,'0800-280-9130')">Copiar</button></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Bradesco Saúde</div><div class="op-desc">Carteirinha ou CPF. Membro pode ter mais de um vínculo</div></div><div class="op-btns"><a href="https://www.bradescoseguros.com.br/clientes/produtos/plano-saude/consulta-de-rede-referenciada" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www.bradescoseguros.com.br/clientes/produtos/plano-saude/consulta-de-rede-referenciada')">Copiar link</button></div></div>
+    <div class="op-tel"><strong>Capitais:</strong> 4004-2700 <button class="tel-copy" onclick="copyTel(this,'4004-2700')">Copiar</button> &nbsp; <strong>Outras:</strong> 0800-701-2700 <button class="tel-copy" onclick="copyTel(this,'0800-701-2700')">Copiar</button></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">SulAmérica</div><div class="op-desc">Rolar até BUSCA DE REDE → produto e plano conforme Backoffice</div></div><div class="op-btns"><a href="https://portal.sulamericaseguros.com.br/home.htm" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://portal.sulamericaseguros.com.br/home.htm')">Copiar link</button></div></div>
+    <div class="op-tel"><strong>Capitais:</strong> 4004-5900 <button class="tel-copy" onclick="copyTel(this,'4004-5900')">Copiar</button> &nbsp; <strong>Outras:</strong> 0800-970-0500 <button class="tel-copy" onclick="copyTel(this,'0800-970-0500')">Copiar</button></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Unimeds (todas)</div><div class="op-desc">Unimed Curitiba, BH, Porto Alegre, Joinville, Sorocaba, Uberlândia, CNU — CPF do membro</div></div><div class="op-btns"><a href="https://www.unimed.coop.br/web/guest/atendimento/rede-credenciada" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www.unimed.coop.br/web/guest/atendimento/rede-credenciada')">Copiar link</button></div></div>
+    <div class="op-tel"><strong>Nacional:</strong> 0800-942-0011 <button class="tel-copy" onclick="copyTel(this,'0800-942-0011')">Copiar</button> &nbsp; <strong>Sorocaba:</strong> 0800-771-0500 <button class="tel-copy" onclick="copyTel(this,'0800-771-0500')">Copiar</button> &nbsp; <strong>BH:</strong> 0800-030-3003 <button class="tel-copy" onclick="copyTel(this,'0800-030-3003')">Copiar</button> &nbsp; <strong>Porto Alegre:</strong> 4004-2040 <button class="tel-copy" onclick="copyTel(this,'4004-2040')">Copiar</button></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Seguros Unimed</div><div class="op-desc">Busca por CPF do membro</div></div><div class="op-btns"><a href="https://www.segurosunimed.com.br/guia-medico/" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www.segurosunimed.com.br/guia-medico/')">Copiar link</button></div></div>
+    <div class="op-tel"><strong>SAC:</strong> 0800-016-6633 <button class="tel-copy" onclick="copyTel(this,'0800-016-6633')">Copiar</button></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Amil</div><div class="op-desc">Código da carteirinha ou CPF</div></div><div class="op-btns"><a href="https://www.amil.com.br/portal/web/servicos/saude/rede-credenciada/amil/busca-avancada" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www.amil.com.br/portal/web/servicos/saude/rede-credenciada/amil/busca-avancada')">Copiar link</button></div></div>
+    <div class="op-tel"><strong>Capitais:</strong> 3004-1000 <button class="tel-copy" onclick="copyTel(this,'3004-1000')">Copiar</button> &nbsp; <strong>Outras:</strong> 0800-706-2363 <button class="tel-copy" onclick="copyTel(this,'0800-706-2363')">Copiar</button></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">GNDI / Intermédica</div><div class="op-desc">Selecionar REDE MÉDICA → plano, especialidade, UF, cidade</div></div><div class="op-btns"><a href="https://www2.gndi.com.br/pesquisa-de-rede" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www2.gndi.com.br/pesquisa-de-rede')">Copiar link</button></div></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Care Plus</div><div class="op-desc">Local → plano → SITUAÇÃO: ATIVO → pesquisar</div></div><div class="op-btns"><a href="https://www8.careplus.com.br/portal/portal/modulos/rede/pesquisaRedeCP.aspx" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www8.careplus.com.br/portal/portal/modulos/rede/pesquisaRedeCP.aspx')">Copiar link</button></div></div>
+    <div class="op-tel"><strong>SAC:</strong> 0800-013-2992 <button class="tel-copy" onclick="copyTel(this,'0800-013-2992')">Copiar</button></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Porto Seguro</div><div class="op-desc">Tipo de produto → filtrar por bairro</div></div><div class="op-btns"><a href="https://www.portoseguro.com.br/porto-seguro-saude/rede-referenciada" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://www.portoseguro.com.br/porto-seguro-saude/rede-referenciada')">Copiar link</button></div></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Allianz Saúde</div><div class="op-desc">Busca por bairro ou cidade</div></div><div class="op-btns"><a href="https://seguros.allianz.com.br/ngx-medical-directory/home/app" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://seguros.allianz.com.br/ngx-medical-directory/home/app')">Copiar link</button></div></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Clinipam</div><div class="op-desc">Mesmo sistema da Hapvida: CPF + data de nascimento</div></div><div class="op-btns"><a href="https://sigo.sh.srv.br/pls/webcli/webnewredecredenciada.selecionarede" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://sigo.sh.srv.br/pls/webcli/webnewredecredenciada.selecionarede')">Copiar link</button></div></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Medic Global</div><div class="op-desc">Busca combinada → Profissional. Para hospital: Busca Isolada</div></div><div class="op-btns"><a href="https://extremamedic.com/rede_credenciada" target="_blank" class="op-btn op-btn-primary">Abrir rede</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://extremamedic.com/rede_credenciada')">Copiar link</button></div></div>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">ABRAMGE — rede nacional de emergência</div><div class="op-desc">Usar quando operadora não tem credenciado local. Válido para: Hapvida NDI, Medic Global e Amil</div></div><div class="op-btns"><a href="https://atendimentoabramge.com.br/#/home/service-locations" target="_blank" class="op-btn op-btn-primary">Abrir</a><button class="op-btn op-btn-copy" onclick="copyLink(this,'https://atendimentoabramge.com.br/#/home/service-locations')">Copiar link</button></div></div>
+  </div>
+</div>
+
+<!-- TELEMEDICINA 24H -->
+<div id="panel-operadoras" class="panel">
+  <div class="alert alert-blue">Use quando não há médico Pipo disponível e o caso não requer presencial. Oriente o membro a acessar pelo app do próprio plano.</div>
+
+  <div class="sec">Operadoras com telemedicina 24h</div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Seguros Unimed</div><div class="op-desc">24h, permite receitas e pedidos de exame</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'Seguros Unimed','1. Baixar Super App Seguros Unimed\n2. Login → Telemedicina → Pronto Atendimento 24h\n3. Responder triagem e aguardar')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>Baixar Super App Seguros Unimed</li><li><span class="sn">2</span>Login → Telemedicina → Pronto Atendimento 24h</li><li><span class="sn">3</span>Responder triagem e aguardar</li></ul>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Amil</div><div class="op-desc">Pronto atendimento 24h por videoconferência</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'Amil','1. Baixar App Amil Clientes\n2. Login → Menu inferior: Rede → Telemedicina Amil\n3. Clicar em Pronto Atendimento')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>Baixar App Amil Clientes</li><li><span class="sn">2</span>Login → Menu inferior: Rede → Telemedicina Amil</li><li><span class="sn">3</span>Clicar em Pronto Atendimento</li></ul>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">SulAmérica</div><div class="op-desc">24h com clínicos, pediatras, especialistas. Permite prescrições digitais</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'SulAmérica','1. Baixar app SulAmérica Saúde\n2. Aba Telemedicina → Pronto Atendimento por Vídeo\n3. Aceitar termo → acessar link da videochamada')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>Baixar app SulAmérica Saúde</li><li><span class="sn">2</span>Aba Telemedicina → Pronto Atendimento por Vídeo</li><li><span class="sn">3</span>Aceitar termo → acessar link da videochamada</li></ul>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Bradesco Saúde</div><div class="op-desc">24h, permite prescrição digital, pedidos de exame e atestados</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'Bradesco Saúde','1. Baixar app Saúde Digital - Bradesco\n2. Login → Saúde Digital → consulta imediata ou agendada')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>Baixar app Saúde Digital - Bradesco</li><li><span class="sn">2</span>Login → Saúde Digital → consulta imediata ou agendada</li></ul>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Porto Seguro</div><div class="op-desc">Telemedicina 24h via app</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'Porto Seguro','1. App Porto Seguro Saúde → Telemedicina 24h')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>App Porto Seguro Saúde → Telemedicina 24h</li></ul>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Care Plus (Blua)</div><div class="op-desc">Via app, ícone azul Blua</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'Care Plus','1. App Care Plus → ícone azul Blua\n2. Pronto Atendimento Virtual ou Teleconsulta')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>App Care Plus → ícone azul Blua</li><li><span class="sn">2</span>Pronto Atendimento Virtual ou Teleconsulta</li></ul>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Hapvida / GNDI</div><div class="op-desc">Via portal do beneficiário</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'Hapvida / GNDI','1. Portal do Beneficiário → informar dados → Pronto Atendimento\n2. Confirmar celular → aguardar ou agendar')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>Portal do Beneficiário → informar dados → Pronto Atendimento</li><li><span class="sn">2</span>Confirmar celular → aguardar ou agendar</li></ul>
+  </div>
+
+  <div class="op-card">
+    <div class="op-header"><div><div class="op-name">Medic Global</div><div class="op-desc">Sem cobrança de coparticipação</div></div><div class="op-btns"><button class="op-btn op-btn-copy" onclick="copyOrientacao(this,'Medic Global','1. Acessar: telemedicina.medicglobal.com.br\n2. Informar credenciais → agendar consulta')">Copiar orientações</button></div></div>
+    <ul class="steps" style="margin-top:10px;"><li><span class="sn">1</span>Acessar: telemedicina.medicglobal.com.br</li><li><span class="sn">2</span>Informar credenciais → agendar consulta</li></ul>
+  </div>
+</div>
+
+<!-- DICAS -->
+<div id="panel-dicas" class="panel">
+  <div class="sec">Fluxo de acionamento 24x7</div>
+<div class="alert alert-blue"><strong>Objetivo:</strong> acolhimento imediato, direcionamento correto e suporte fora do horário comercial (18h–9h e fins de semana).</div>
+
+  <div class="sec">Como o membro aciona o plantão</div>
+  <div class="card"><div class="card-body open" style="display:block;">
+    <div class="alert alert-green" style="margin-bottom:10px;"><strong>Fluxo oficial:</strong> membro envia "pipourgencia" no WhatsApp do Pipo Cuida → bot coleta contexto → você é acionada via Squadcast.</div>
+    <ul class="steps">
+      <li><span class="sn">1</span>Membro envia <strong>"pipourgencia"</strong> no WhatsApp do Pipo Cuida.</li>
+      <li><span class="sn">2</span>Bot faz perguntas para coletar contexto.</li>
+      <li><span class="sn">3</span>Você é acionada via Squadcast (ligação + app + email).</li>
+      <li><span class="sn">4</span>Se não atender em poucos minutos → supervisão é acionada automaticamente.</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:10px;"><strong>Grupo WhatsApp "Pipo Urgência":</strong> é de apoio interno — não é o canal de acionamento. <a href="https://faq.piposaude.com.br/hc/pt-br/articles/360051131453" target="_blank" style="color:#b7550a;">Ver FAQ</a></div>
+  </div></div>
+
+  <div class="sec">Fluxo de abordagem</div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title"><span class="badge badge-gray">1</span> Receber e entender</span><span class="chevron">▼</span></div><div class="card-body"><ul class="steps"><li><span class="sn">→</span>Ler o histórico do ticket — o bot já fez perguntas. Não repetir.</li><li><span class="sn">→</span>Se não tiver número de contato, solicitar.</li></ul></div></div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title"><span class="badge badge-gray">2</span> Primeiro contato</span><span class="chevron">▼</span></div><div class="card-body"><div class="qs"><div class="qs-title">Apresentação na ligação</div><div class="q">"Sou enfermeira [Nome] da Pipo Saúde. Estou ligando sobre [motivo]."</div></div></div></div>
+  <div class="card"><div class="card-header" onclick="toggle(this)"><span class="card-title"><span class="badge badge-gray">3</span> Agir conforme necessidade</span><span class="chevron">▼</span></div><div class="card-body"><ul class="steps"><li><span class="sn">→</span>Triagem clínica e estratificação de risco.</li><li><span class="sn">→</span>Busca de rede (fora do horário: somente PS).</li><li><span class="sn">→</span>Orientar telemedicina do plano se necessário.</li><li><span class="sn">→</span>Registrar tudo no Nilo e no ticket do Zendesk.</li></ul></div></div>
+
+  <div class="sec">Acionar liderança</div>
+  <div class="card"><div class="card-body open" style="display:block;"><ul class="steps">
+    <li><span class="sn">1</span>Acionar via <strong>WhatsApp</strong> primeiro.</li>
+    <li><span class="sn">2</span>Sem resposta em <strong>10 minutos</strong> → ligar.</li>
+    <li><span class="sn">3</span>Sem sucesso → postar no <strong>grupo de urgência do WhatsApp</strong>.</li>
+  </ul></div></div>
+
+  <div class="sec">Regras do plantão</div>
+  <div class="card"><div class="card-body open" style="display:block;"><ul class="steps">
+    <li><span class="no">✗</span>Busca de rede fora do horário: somente <strong>pronto-socorro</strong>.</li>
+    <li><span class="no">✗</span>Grupo WhatsApp: somente casos operacionais urgentes.</li>
+    <li><span class="ok">✓</span>Todo atendimento clínico → registrar no Nilo.</li>
+    <li><span class="ok">✓</span>Na dúvida se é urgente: peca pelo excesso de cautela.</li>
+  </ul></div></div>
+
+
+  <div class="alert alert-red">Na dúvida se é urgente: peca pelo excesso de cautela.</div>
+
+  <div class="sec">Squadcast — fluxo de acionamento</div>
+  <div class="card"><div class="card-body open" style="display:block;"><ul class="steps">
+    <li><span class="sn">1</span>Receber ligação + notificação no app + email.</li>
+    <li><span class="sn">2</span>Na ligação: digitar <strong>1</strong>. No app: clicar <strong>Acknowledged</strong>.</li>
+    <li><span class="sn">3</span>Link do ticket aparece no app → abrir no Zendesk e atender.</li>
+    <li><span class="sn">4</span>Após finalizar no Zendesk → marcar como <strong>resolvido</strong> no Squadcast.</li>
+  </ul><div class="alert alert-amber" style="margin-top:10px;">Sempre finalizar no Squadcast — caso contrário o sistema fica com o acionamento em aberto.</div></div></div>
+
+  <div class="sec">Nilo — como registrar</div>
+  <div class="card"><div class="card-body open" style="display:block;"><ul class="steps">
+    <li><span class="ok">✓</span>Todo atendimento clínico → abrir o Nilo e registrar. Sempre.</li>
+    <li><span class="ok">✓</span>Primeira pessoa: "Realizei acolhimento...", "Orientei a membra..."</li>
+    <li><span class="ok">✓</span>Tópico: <strong>Atendimento 24x7</strong></li>
+    <li><span class="ok">✓</span>Desfecho: acolhimento, teleconsulta, PS, sem retorno após protocolo</li>
+    <li><span class="no">✗</span>Dúvida técnica ou acesso → só no ticket do Zendesk</li>
+    <li><span class="no">✗</span>Caso administrativo sem avaliação clínica → só no ticket</li>
+  </ul><div class="alert alert-amber" style="margin-top:10px;">A Aline audita o Nilo. Se atendeu, registrou.</div></div></div>
+
+  <div class="sec">Passagem de plantão</div>
+  <div class="card"><div class="card-body open" style="display:block;"><ul class="steps">
+    <li><span class="sn">1</span>Revisar todos os <strong>tickets abertos</strong> antes de encerrar.</li>
+    <li><span class="sn">2</span>Registrar status atual e próximos passos em cada ticket.</li>
+    <li><span class="sn">3</span>Sinalizar para a <strong>colega que entra</strong> os casos em andamento.</li>
+    <li><span class="sn">4</span>Sinalizar para a <strong>Aline</strong> os acionamentos para computar no Squadcast.</li>
+  </ul></div></div>
+
+  <div class="sec">WhatsApp de urgência — quando usar</div>
+  <div class="card"><div class="card-body open" style="display:block;"><ul class="steps">
+    <li><span class="ok">✓</span>Bloqueio de plano impactando atendimento urgente</li>
+    <li><span class="ok">✓</span>Internação com problema que você não resolve</li>
+    <li><span class="ok">✓</span>Médico não respondeu em 10 min e o caso não pode esperar</li>
+    <li><span class="no">✗</span>Casos rotineiros — não usar o grupo para isso</li>
+    <li><span class="no">✗</span>Dúvidas que podem esperar o horário comercial</li>
+  </ul></div></div>
+
+  <div class="sec">Não repetir perguntas do bot</div>
+  <div class="card"><div class="card-body open" style="display:block;"><div class="alert alert-amber">Antes de perguntar, ler o histórico do ticket. O bot já coletou informações — repetir frustra o membro.</div></div></div>
+
+  <div class="sec">Zendesk — o que preencher</div>
+  <div class="card"><div class="card-body open" style="display:block;"><ul class="steps">
+    <li><span class="ok">✓</span>Nome completo, CPF, data de nascimento — sempre.</li>
+    <li><span class="ok">✓</span>Registrar o que foi feito, mesmo que em uma frase.</li>
+    <li><span class="ok">✓</span>Usar @menção na observação interna para orientar colega.</li>
+    <li><span class="no">✗</span>Não mudar status sem ter feito a ação correspondente.</li>
+  </ul></div></div>
+</div>
+
+</div><!-- /content -->
+
+<div class="footer">
+  Criado por <strong style="color:#fff">Letícia Rodrigues</strong> — Enfermeira | Pipo Saúde<br>
+  Material de apoio para atendimentos fora do horário comercial (plantão 24x7)<br>
+  <a href="mailto:leticia.rodrigues@piposaude.com.br">leticia.rodrigues@piposaude.com.br</a> &nbsp;|&nbsp;
+  <a href="https://piposaude.slack.com/team/U0B1GUWNF9S">Slack</a>
+</div>
+
+<script>
+// DADOS DE TRIAGEM
+const triData = [
+
+  {keys:['febre','temperatura','febril'],title:'Febre',
+   perguntas:['Quando começou? Qual a temperatura?','Há outros sintomas junto (tosse, dor, expectoração)?','Fez uso de medicação?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — febre isolada &lt;72h, temperatura &lt;39°C, sem outros sintomas'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — febre com outros sintomas que podem precisar de prescrição'},
+     {cor:'red',txt:'<strong>PS</strong> — febre &gt;72h e/ou temperatura ≥39°C sem melhora com medicação'}
+   ],
+   links:[
+     {txt:'Enf. 15min — febre isolada',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Med. 15min — febre com sintomas',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'Suspeita de dengue → PS. Criança &lt;3 meses → PS.',casos:[]},
+
+  {keys:['tosse','gripe','resfriado','coriza','garganta','gripado'],title:'Sintomas gripais / respiratórios',
+   perguntas:['Tem febre? Há quanto tempo?','Está com falta de ar?','Há quanto tempo iniciaram os sintomas?','Tem expectoração? Qual coloração?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — sintomas gripais sem febre, ou febre &lt;72h, sem falta de ar, início agudo &lt;3 dias'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — sintomas gripais há &gt;3 dias, sem urgência, eletivo'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — febre persistente, expectoração amarelada/esverdeada, dor na face (sinusite), necessita prescrição'},
+     {cor:'red',txt:'<strong>PS</strong> — febre &gt;72h e/ou falta de ar'}
+   ],
+   links:[
+     {txt:'Enf. 15min — agudo &lt;3 dias',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Enf. 30min — eletivo &gt;3 dias',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — necessita prescrição',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'',casos:[]},
+
+  {keys:['vomito','vômito','nausea','náusea','enjoo'],title:'Vômitos / Náusea',
+   perguntas:['Teve febre?','Dor abdominal de 0 a 10?','Consegue beber líquidos?','Há quanto tempo?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — sintomas leves, sem febre, sem dor intensa, consegue beber líquidos, início &lt;3 dias'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — sintomas há &gt;3 dias, eletivo, investigar mais'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — precisa de atestado ou prescrição'},
+     {cor:'red',txt:'<strong>PS</strong> — febre e/ou dor 8+ e/ou não consegue beber líquidos'}
+   ],
+   links:[
+     {txt:'Enf. 15min — leve &lt;3 dias',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Enf. 30min — eletivo &gt;3 dias',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — atestado / prescrição',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'Menor de 1 ano ou maior de 60 anos → PS. Pós-bariátrica intolerância total → PS urgente.',
+   casos:[{tipo:'Caso real',txt:'Pós-bariátrica diabética + insulina + não tolerava nada há dias + tontura. Correto: PS hoje.'}]},
+
+  {keys:['diarreia','fezes liquidas'],title:'Diarreia',
+   perguntas:['Teve febre?','Dor na barriga de 0 a 10?','Percebeu sangue ou muco?','Está desidratado (tontura, fraqueza)?','Há quanto tempo?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — sintomas leves, sem febre, dor até 6, &lt;5 evacuações ao dia, início &lt;3 dias'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — sintomas há &gt;3 dias, eletivo'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — dor nível 7, sintomas acima de 48h, precisa de atestado'},
+     {cor:'red',txt:'<strong>PS</strong> — febre e/ou dor 8-10 e/ou sangue/muco e/ou desidratação e/ou &gt;60 anos e/ou &gt;14 dias'}
+   ],
+   links:[
+     {txt:'Enf. 15min — leve &lt;3 dias',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Enf. 30min — eletivo &gt;3 dias',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — moderado / atestado',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'',casos:[]},
+
+  {keys:['dor abdominal','dor barriga','dor na barriga','colica'],title:'Dor abdominal',
+   perguntas:['Dor de 0 a 10?','Teve febre?','Há quanto tempo? É cólica ou contínua?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — dor até 5, início agudo &lt;3 dias, sem febre'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — sintoma há &gt;3 dias, eletivo, sem urgência'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — dor nível 6-7, cólica, precisa de avaliação médica'},
+     {cor:'red',txt:'<strong>PS</strong> — dor 8+ e/ou febre'}
+   ],
+   links:[
+     {txt:'Enf. 15min — dor leve &lt;3 dias',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Enf. 30min — eletivo &gt;3 dias',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — dor moderada / cólica',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'',casos:[]},
+
+  {keys:['dor de cabeca','dor de cabeça','cefaleia','enxaqueca'],title:'Dor de cabeça / Enxaqueca',
+   perguntas:['Intensidade de 0 a 10?','Teve febre?','Sintomas associados (náusea, vertigem, alteração visual)?','Há quanto tempo?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — dor até 7, início agudo &lt;3 dias, sem febre, sem sintomas neurológicos'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — dor recorrente há &gt;3 dias, eletivo, sem urgência'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — enxaqueca com crise, sintomas associados (náusea/vertigem), precisa de prescrição, acima de 48h sem melhora'},
+     {cor:'red',txt:'<strong>PS</strong> — dor 8-10 e/ou febre e/ou alteração visual e/ou tontura'}
+   ],
+   links:[
+     {txt:'Enf. 15min — agudo &lt;3 dias',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Enf. 30min — eletivo &gt;3 dias',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — enxaqueca / prescrição',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'',casos:[]},
+
+  {keys:['dor costas','dor nas costas','lombar','coluna'],title:'Dor nas costas / lombar',
+   perguntas:['Intensidade de 0 a 10?','Impede locomoção?','Começou após trauma?','Tem câncer ou HIV?','Há quantos dias?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — dor até 7, início &lt;7 dias, sem trauma, sem febre'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — dor há &gt;7 dias, eletivo, crônica'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — precisa de atestado ou prescrição'},
+     {cor:'red',txt:'<strong>PS</strong> — dor 8+ e/ou impede locomoção e/ou após trauma e/ou febre'}
+   ],
+   links:[
+     {txt:'Enf. 15min — agudo &lt;7 dias',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Enf. 30min — crônico &gt;7 dias',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — atestado / prescrição',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'HIV sem TARV + dor irradiando para pernas → PS hoje.',
+   casos:[
+     {tipo:'Caso real',txt:'HIV+ sem TARV + dor lombar irradiando pernas. Tratado como lombar mecânica — errado. Correto: PS hoje.'},
+     {tipo:'Caso real',txt:'Perda de força súbita nas pernas + dor lombar. Só busca de rede — errado. Correto: PS urgente.'}
+   ]},
+
+  {keys:['infeccao urinaria','infecção urinaria','itu','ardencia urinar','xixi dor','urinar'],title:'Infecção urinária',
+   perguntas:['Teve febre?','Sente dor na lombar?','Percebeu sangue na urina?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — ardência/dor sem febre, sem lombar, sem sangue (precisa de antibiótico — vai direto para médico)'},
+     {cor:'red',txt:'<strong>PS</strong> — com febre e/ou dor lombar e/ou sangue na urina'}
+   ],
+   links:[{txt:'Med. 15min — precisa de antibiótico',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}],
+   alerta:'ITU vai direto para médico — não passa pela enfermagem.',casos:[]},
+
+  {keys:['ansiedade','crise ansiedade','panico','pânico'],title:'Ansiedade / Crise de ansiedade',
+   perguntas:['Está em crise AGORA?','O que está sentindo?','Faz acompanhamento?','Tem falta de ar?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — em crise ansiosa agora (acolhimento + direcionamento)'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — acompanhamento de ansiedade, eletivo'},
+     {cor:'red',txt:'<strong>PS</strong> — com falta de ar'}
+   ],
+   links:[{txt:'Enf. 30min',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'}],
+   alerta:'Ansiedade vai para Enf. 30min — nunca para 15min.',casos:[]},
+
+  {keys:['depressao','depressão','triste','saude mental','saúde mental'],title:'Saúde mental / Sintomas depressivos',
+   perguntas:['O que está sentindo? Há quanto tempo?','Já faz acompanhamento?','Já teve pensamentos de se machucar?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — em crise hoje ou acompanhamento (disponibilizar rede psiquiatra junto)'},
+     {cor:'red',txt:'<strong>PS psiquiátrico</strong> — ideação suicida ou crise depressiva grave'}
+   ],
+   links:[{txt:'Enf. 30min',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'}],
+   alerta:'Saúde mental vai para Enf. 30min. Se ideação → PS psiquiátrico + CVV 188.',casos:[]},
+
+  {keys:['suicidio','suicídio','ideacao','me machucar','quero morrer'],title:'Ideação suicida',
+   perguntas:['Está com esse pensamento AGORA?','Planejou alguma coisa?','Está sozinho agora?'],
+   dirs:[{cor:'red',txt:'<strong>PS psiquiátrico</strong> — qualquer ideação → acionar chefia no WhatsApp AGORA + CVV 188'}],
+   links:[],alerta:'Não deixar a pessoa sozinha. Ligar imediatamente. CVV: 188.',casos:[]},
+
+  {keys:['dengue','manchas vermelhas','dor no corpo','dor nos ossos'],title:'Suspeita de dengue',
+   perguntas:['Teve febre? Há quanto tempo?','Está com manchas vermelhas?','Dor atrás dos olhos?','Tontura ou fraqueza?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — sintomas &lt;72h, sem sinais de alarme'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — confirmação de dengue, precisa de atestado'},
+     {cor:'red',txt:'<strong>PS</strong> — febre &gt;72h + tontura/dor abdominal intensa/vômitos/sangramento'}
+   ],
+   links:[
+     {txt:'Enf. 15min — triagem inicial',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Med. 15min — confirmada / atestado',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'Sinais de alarme da dengue = PS urgente.',casos:[]},
+
+  {keys:['alergia','urticaria','urticária','coceira','garganta inchada'],title:'Reação alérgica',
+   perguntas:['O que está sentindo?','Tem falta de ar?','Tem garganta inchada?','Usou algo diferente (alimento, medicação)?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — reação cutânea leve, sem sintomas respiratórios'},
+     {cor:'red',txt:'<strong>PS</strong> — falta de ar e/ou garganta inchada e/ou reação sistêmica'}
+   ],
+   links:[{txt:'Med. 15min — reação leve',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}],
+   alerta:'Falta de ar ou garganta inchada = emergência.',casos:[]},
+
+  {keys:['sangramento vaginal','sangramento','menstruacao','menstruação'],title:'Sangramento vaginal',
+   perguntas:['Está com tontura ou sensação de desmaio?','Está gestante?','Está sangrando agora? Há quantos dias?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — sangrando agora, não gestante, sem tontura (precisa de avaliação médica)'},
+     {cor:'gray',txt:'<strong>Eletivo ginecologista</strong> — sangramento aumentado mas não está sangrando agora'},
+     {cor:'red',txt:'<strong>PS</strong> — gestante → PS obstétrico. Com tontura/desmaio → PS ginecológico'}
+   ],
+   links:[{txt:'Med. 15min — sangrando agora',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}],
+   alerta:'',casos:[]},
+
+  {keys:['corrimento vaginal','corrimento','secrecao vaginal'],title:'Corrimento vaginal',
+   perguntas:['Está gestante?','Teve febre e/ou dor no pé da barriga?','Percebeu sangue?','Há quanto tempo?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — não gestante, há &lt;30 dias, sem sangue, sem febre (precisa de prescrição)'},
+     {cor:'red',txt:'<strong>PS</strong> — gestante e/ou febre e/ou dor no pé da barriga e/ou sangue'}
+   ],
+   links:[{txt:'Med. 15min — precisa de prescrição',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}],
+   alerta:'',casos:[]},
+
+  {keys:['rinite','nariz entupido','espirro','alergia nariz'],title:'Rinite alérgica',
+   perguntas:['O que está sentindo?','Há quanto tempo?','Faz algum tratamento?','Está com falta de ar?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 15min</strong> — sintomas agudos &lt;3 dias, piora recente'},
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — sintomas crônicos, eletivo, em acompanhamento'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — precisa de prescrição ou ajuste de medicação'},
+     {cor:'red',txt:'<strong>PS</strong> — com falta de ar'}
+   ],
+   links:[
+     {txt:'Enf. 15min — piora aguda',url:'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min'},
+     {txt:'Enf. 30min — eletivo',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — prescrição',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'',casos:[]},
+
+  {keys:['medicamento','medicacao','medicação','remedio','remédio','efeito colateral'],title:'Reação adversa à medicação',
+   perguntas:['O que está sentindo?','Há quanto tempo usa essa medicação?','Essa medicação foi prescrita pela Pipo?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — sintomas leves (enjôo, sonolência, dor de cabeça) — APENAS SE PRESCRITA PELA PIPO'},
+     {cor:'gray',txt:'<strong>CEATOX: 0800-0148110</strong> — medicação NÃO prescrita pela Pipo'},
+     {cor:'red',txt:'<strong>PS</strong> — febre, falta de ar, lesões, confusão mental, convulsão'}
+   ],
+   links:[{txt:'Med. 15min — prescrita pela Pipo',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}],
+   alerta:'CEATOX: 0800-0148110 — reação a medicamento não prescrito pela Pipo.',casos:[]},
+
+  {keys:['asma','bronquite','falta de ar','respirar','dispneia'],title:'Asma / Bronquite',
+   perguntas:['Quando foi a última crise?','Medicação em uso?','Em acompanhamento com especialista?'],
+   dirs:[
+     {cor:'amber',txt:'<strong>Enf. 30min</strong> — diagnóstico de asma/bronquite, sem crise agora, eletivo'},
+     {cor:'amber',txt:'<strong>Med. 15min</strong> — crise há &lt;24h, necessita de prescrição'},
+     {cor:'red',txt:'<strong>PS</strong> — com falta de ar e/ou dor no peito'}
+   ],
+   links:[
+     {txt:'Enf. 30min — eletivo',url:'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min'},
+     {txt:'Med. 15min — crise &lt;24h',url:'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1'}
+   ],alerta:'Falta de ar = PS sem hesitar.',casos:[]},
+
+  {keys:['internacao','internação','leito','autorizacao','bloqueio plano','bloqueio'],title:'Internação / autorização / bloqueio',
+   perguntas:['Onde está? Qual setor?','Com quem falou sobre o problema?','O plano não autorizou? Qual a justificativa?'],
+   dirs:[
+     {cor:'amber',txt:'Ligar para o paciente primeiro — sempre'},
+     {cor:'amber',txt:'Se plano não autorizou: ligar para a operadora (aba Rede e Telefones)'},
+     {cor:'red',txt:'Se travar: escalar chefia no WhatsApp de urgência'}
+   ],
+   links:[],alerta:'Nunca tome decisão sobre internação só com a informação do RH.',casos:[]}
+];
+
+// NAVEGAÇÃO
+const tabNames=['triagem','links','mensagens','relatorio','rede','operadoras','dicas'];
+function showTab(name){
+  document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',tabNames[i]===name));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  const el = document.getElementById('panel-'+name);
+  if(el) el.classList.add('active');
+}
+
+function toggle(h){
+  const b=h.nextElementSibling;
+  b.classList.toggle('open');
+  h.querySelector('.chevron').classList.toggle('open');
+}
+
+// TRIAGEM BUSCA
+function buscaTriagem(){
+  const q=document.getElementById('search-triagem').value.toLowerCase().trim();
+  const hint=document.getElementById('triagem-hint');
+  const lista=document.getElementById('triagem-lista');
+  const result=document.getElementById('triagem-result');
+  const multi=document.getElementById('triagem-multi');
+  const empty=document.getElementById('triagem-empty');
+
+  hint.style.display=q?'none':'block';
+  lista.style.display=q?'none':'block';
+
+  if(!q){result.style.display='none';multi.style.display='none';empty.style.display='none';return;}
+
+  const matches=triData.filter(d=>d.keys.some(k=>k.includes(q)||q.includes(k)||q.split(' ').some(w=>w.length>2&&k.includes(w))));
+
+  if(matches.length===0){result.style.display='none';multi.style.display='none';empty.style.display='block';}
+  else if(matches.length===1){empty.style.display='none';multi.style.display='none';showResult(matches[0]);}
+  else{
+    empty.style.display='none';result.style.display='none';
+    multi.innerHTML='<div style="font-size:12px;color:#888;margin-bottom:10px;">Mais de um resultado — qual é o sintoma?</div>'+
+      matches.map(m=>`<button class="multi-btn" onclick="showResult(triData.find(d=>d.title==='${m.title.replace(/'/g,"\\'")}'))">${m.title}</button>`).join('');
+    multi.style.display='block';
+  }
+}
+
+function showResult(d){
+  if(!d)return;
+  document.getElementById('triagem-multi').style.display='none';
+  document.getElementById('triagem-empty').style.display='none';
+
+  const corMap={red:'red',amber:'amber',green:'green',gray:'gray'};
+  const corLabel={red:'PS — presencial urgente',amber:'Teleconsulta',green:'Eletivo',gray:'Eletivo / especialista'};
+
+  let html=`<div class="triagem-result">`;
+  html+=`<div class="triagem-result-title">${d.title}</div>`;
+
+  // Perguntas
+  html+=`<div class="triagem-block"><div class="triagem-block-title">O que perguntar agora</div>`;
+  html+=d.perguntas.map(p=>`<div class="q" style="padding:7px 0;">→ ${p}</div>`).join('');
+  html+=`</div>`;
+
+  // Direcionamento
+  html+=`<div class="triagem-block"><div class="triagem-block-title">Direcionamento</div><div class="triagem-dirs">`;
+  html+=d.dirs.map(dir=>`<div class="triagem-dir ${dir.cor}"><strong>${corLabel[dir.cor] || dir.cor}:</strong> &nbsp;${dir.txt}</div>`).join('');
+  html+=`</div></div>`;
+
+  // Links de teleconsulta
+  if(d.links.length>0){
+    html+=`<div class="triagem-block"><div class="triagem-block-title">Links de teleconsulta</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px;">`;
+    d.links.forEach(l=>{
+      html+=`<button class="triagem-link copy" onclick="copyLink(this,'${l.url}')">${l.txt}</button>`;
+    });
+    html+=`</div></div>`;
+  }
+
+  // Alerta
+  if(d.alerta) html+=`<div class="triagem-alerta"><strong>Atenção:</strong> ${d.alerta}</div>`;
+
+  // Casos reais
+  if(d.casos && d.casos.length>0){
+    html+=`<div class="triagem-block" style="margin-top:10px;"><div class="triagem-block-title">Casos de referência</div>`;
+    d.casos.forEach(c=>{html+=`<div class="triagem-caso"><div class="triagem-caso-title">${c.tipo}</div>${c.txt}</div>`;});
+    html+=`</div>`;
+  }
+
+  html+=`</div>`;
+  const result=document.getElementById('triagem-result');
+  result.innerHTML=html;
+  result.style.display='block';
+}
+
+// TAGS
+const sel={};
+function selectTag(el,g){
+  document.querySelectorAll(`.tag[data-g="${g}"]`).forEach(t=>{t.classList.remove('selected');});
+  el.setAttribute('data-g',g);el.classList.add('selected');sel[g]=el.textContent;
+}
+
+// COPIAR
+function copyLink(btn,url){
+  navigator.clipboard.writeText(url).then(()=>{
+    const orig=btn.textContent||btn.innerText;
+    btn.textContent='✓ Copiado!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied');},2000);
+  });
+}
+function copyTel(btn,tel){
+  navigator.clipboard.writeText(tel).then(()=>{
+    const orig=btn.textContent;btn.textContent='✓ Copiado!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied');},2000);
+  });
+}
+function copyOrientacao(btn,operadora,passos){
+  const txt=`${operadora} — Telemedicina 24h\n\n${passos}`;
+  navigator.clipboard.writeText(txt).then(()=>{
+    btn.textContent='✓ Copiado!';btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent='Copiar orientações';btn.classList.remove('copied');},2000);
+  });
+}
+function copyMsg(btn){
+  navigator.clipboard.writeText(btn.previousElementSibling.textContent).then(()=>{
+    btn.textContent='✓ Copiado!';setTimeout(()=>{btn.textContent='Copiar'},2000);
+  });
+}
+
+// GERAR EVOLUÇÃO
+async function gerar(){
+  const tr=document.getElementById('transcricao').value.trim();
+  if(!tr){alert('Cole a transcrição primeiro.');return;}
+  const tipo=sel['tipo']||'não especificado';
+  const desfecho=sel['desfecho']||'não especificado';
+  const ticket=document.getElementById('ticket-id').value.trim();
+  document.getElementById('btn-gerar').disabled=true;
+  document.getElementById('loading').style.display='inline';
+  document.getElementById('output').classList.remove('show');
+  document.getElementById('btn-copy').style.display='none';
+  const prompt=`Você é especialista em enfermagem de teleconsulta da Pipo Saúde. Gere a evolução no formato padrão do Nilo.
+
+TIPO: ${tipo}
+DESFECHO: ${desfecho}
+TICKET ZENDESK: ${ticket||'não informado'}
+
+TRANSCRIÇÃO:
+${tr}
+
+Formato OBRIGATÓRIO:
+
+TÍTULO: Plantão 24x7${ticket?' | Ticket #'+ticket:''}
+
+1. MOTIVO DO ATENDIMENTO
+[1-3 frases sobre a queixa principal]
+
+2. HISTÓRICO CLÍNICO E CONTEXTO
+[Primeira pessoa. Nome, operadora, sintomas, tempo, intensidade 0-10, medicações. Cronológico.]
+
+3. CÓDIGO CIAP-2
+[Código + descrição. Se administrativo: "Não aplicável"]
+
+4. CONDUTAS E ORIENTAÇÕES
+[Estratificação de risco, direcionamento, orientações dadas, limitações explicadas.]
+
+5. DESFECHO
+- Origem do atendimento: Acolhimento
+- Canal utilizado: Ferramenta oficial de chat
+- Desfecho do atendimento: ${desfecho}
+
+REGRAS: primeira pessoa (Realizei, Orientei, Acolhi). Negrito para medicamentos e valores clínicos. Objetivo e formal.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();
+    const txt=d.content?.filter(b=>b.type==='text').map(b=>b.text).join('\n')||'Erro ao gerar.';
+    document.getElementById('output').textContent=txt;
+    document.getElementById('output').classList.add('show');
+    document.getElementById('btn-copy').style.display='inline-block';
+  }catch(e){
+    document.getElementById('output').textContent='Erro de conexão. Tente novamente.';
+    document.getElementById('output').classList.add('show');
+  }finally{
+    document.getElementById('btn-gerar').disabled=false;
+    document.getElementById('loading').style.display='none';
+  }
+}
+function copiar(){
+  navigator.clipboard.writeText(document.getElementById('output').textContent).then(()=>{
+    const b=document.getElementById('btn-copy');b.textContent='✓ Copiado!';
+    setTimeout(()=>{b.textContent='Copiar para o Nilo'},2000);
+  });
+}
+
+async function gerar(){
+  const tr=document.getElementById('transcricao').value.trim();
+  if(!tr){alert('Cole a transcrição primeiro.');return;}
+  const tipo=sel['tipo']||'não especificado';
+  const desfecho=sel['desfecho']||'não especificado';
+  const ticket=document.getElementById('ticket-id').value.trim();
+  document.getElementById('btn-gerar').disabled=true;
+  document.getElementById('loading').style.display='inline';
+  document.getElementById('output').classList.remove('show');
+  document.getElementById('btn-copy').style.display='none';
+  const prompt=`Você é especialista em enfermagem de teleconsulta da Pipo Saúde. Gere a evolução no formato padrão do Nilo.
+
+TIPO: ${tipo}
+DESFECHO: ${desfecho}
+TICKET ZENDESK: ${ticket||'não informado'}
+
+TRANSCRIÇÃO:
+${tr}
+
+Formato OBRIGATÓRIO:
+
+TÍTULO: Plantão 24x7${ticket?' | Ticket #'+ticket:''}
+
+1. MOTIVO DO ATENDIMENTO
+[1-3 frases sobre a queixa principal]
+
+2. HISTÓRICO CLÍNICO E CONTEXTO
+[Primeira pessoa. Nome, operadora, sintomas, tempo, intensidade 0-10, medicações. Cronológico.]
+
+3. CÓDIGO CIAP-2
+[Código + descrição. Se administrativo: "Não aplicável"]
+
+4. CONDUTAS E ORIENTAÇÕES
+[Estratificação de risco, direcionamento, orientações dadas, limitações explicadas.]
+
+5. DESFECHO
+- Origem do atendimento: Acolhimento
+- Canal utilizado: Ferramenta oficial de chat
+- Desfecho do atendimento: ${desfecho}
+
+REGRAS: primeira pessoa (Realizei, Orientei, Acolhi). Negrito para medicamentos e valores clínicos. Objetivo e formal.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();
+    const txt=d.content?.filter(b=>b.type==='text').map(b=>b.text).join('\n')||'Erro ao gerar.';
+    document.getElementById('output').textContent=txt;
+    document.getElementById('output').classList.add('show');
+    document.getElementById('btn-copy').style.display='inline-block';
+  }catch(e){
+    document.getElementById('output').textContent='Erro de conexão. Tente novamente.';
+    document.getElementById('output').classList.add('show');
+  }finally{
+    document.getElementById('btn-gerar').disabled=false;
+    document.getElementById('loading').style.display='none';
+  }
+}
+function copiar(){
+  navigator.clipboard.writeText(document.getElementById('output').textContent).then(()=>{
+    const b=document.getElementById('btn-copy');b.textContent='✓ Copiado!';
+    setTimeout(()=>{b.textContent='Copiar para o Nilo'},2000);
+  });
+}
+
+
+const ENF15 = 'https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min';
+const ENF30 = 'https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min';
+const MED15 = 'https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1';
+const MED30 = 'https://calendly.com/d/cxpv-k4h-8v5/teleconsulta-medica-pipo-saude-2';
+
+let historicoChat = [];
+
+async function analisar() {
+  const msg = document.getElementById('msg-paciente').value.trim();
+  if (!msg) { alert('Cole o que o paciente relatou primeiro.'); return; }
+  
+  historicoChat = [];
+  historicoChat.push({ role: 'paciente', texto: msg });
+  
+  document.getElementById('btn-analisar').disabled = true;
+  document.getElementById('loading-ass').style.display = 'inline';
+  
+  await gerarAnalise(msg);
+  
+  document.getElementById('btn-analisar').disabled = false;
+  document.getElementById('loading-ass').style.display = 'none';
+  document.getElementById('continuar-area').style.display = 'block';
+}
+
+async function continuar() {
+  const msg = document.getElementById('msg-continuacao').value.trim();
+  if (!msg) { alert('Cole a resposta do paciente primeiro.'); return; }
+  
+  historicoChat.push({ role: 'paciente', texto: msg });
+  document.getElementById('msg-continuacao').value = '';
+  
+  await gerarAnalise(msg, true);
+}
+
+async function gerarAnalise(msg, isContinuacao = false) {
+  const historico = historicoChat.map(h => `${h.role === 'paciente' ? 'PACIENTE' : 'ENFERMEIRA'}: ${h.texto}`).join('\n');
+  
+  const prompt = `Você é uma enfermeira experiente da Pipo Saúde auxiliando no plantão 24x7. Analise o relato abaixo e responda em formato estruturado.
+
+HISTÓRICO DA CONVERSA:
+${historico}
+
+NOVA MENSAGEM DO PACIENTE: ${msg}
+
+Responda EXATAMENTE neste formato JSON:
+
+{
+  "direcionamento": "PS" ou "ENF15" ou "ENF30" ou "MED15" ou "MED30" ou "ELETIVO",
+  "urgencia": "URGENTE" ou "MODERADO" ou "ELETIVO",
+  "motivo_direcionamento": "explicação clara em 1-2 frases do por quê",
+  "perguntas": ["pergunta 1", "pergunta 2", "pergunta 3"],
+  "orientacoes": "texto completo de orientação para copiar e enviar ao paciente",
+  "medicacoes_cofen801": ["medicação 1 se aplicável"],
+  "alerta": "alerta importante se houver, senão string vazia",
+  "sinais_alarme": ["sinal 1 que indicaria PS", "sinal 2"]
+}
+
+REGRAS:
+- ENF15: sintoma agudo <3 dias, sem necessidade de prescrição
+- ENF30: sintoma eletivo >3 dias, saúde mental, acompanhamento
+- MED15: precisa de prescrição/antibiótico (ITU, infecção, receita)
+- MED30: sintoma eletivo com necessidade médica
+- PS: qualquer sinal de alerta, urgência, risco de vida
+- medicacoes_cofen801: APENAS medicações da Resolução COFEN 801/2026 que o enfermeiro pode orientar conforme protocolo institucional aprovado (dipirona, paracetamol, ibuprofeno, soro oral, nitrofurantoína para ITU)
+- Responda APENAS o JSON, sem texto antes ou depois`;
+
+  try {
+    const r = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const d = await r.json();
+    const txt = d.content?.filter(b => b.type === 'text').map(b => b.text).join('') || '';
+    
+    const clean = txt.replace(/```json|```/g, '').trim();
+    const data = JSON.parse(clean);
+    
+    historicoChat.push({ role: 'enfermeira', texto: JSON.stringify(data) });
+    renderAnalise(data, isContinuacao);
+    
+  } catch(e) {
+    renderErro();
+  }
+}
+
+function renderAnalise(data, isContinuacao) {
+  const hist = document.getElementById('chat-historico');
+  
+  const dirMap = {
+    'PS': { label: 'PRONTO-SOCORRO', cor: 'red', url: null },
+    'ENF15': { label: 'Enfermagem 15min', cor: 'blue', url: ENF15 },
+    'ENF30': { label: 'Enfermagem 30min', cor: 'blue', url: ENF30 },
+    'MED15': { label: 'Médica 15min', cor: 'blue', url: MED15 },
+    'MED30': { label: 'Médica 30min', cor: 'blue', url: MED30 },
+    'ELETIVO': { label: 'Eletivo — agendar', cor: 'gray', url: null }
+  };
+  
+  const dir = dirMap[data.direcionamento] || dirMap['ELETIVO'];
+  
+  let html = `<div class="chat-item enfermeiro">`;
+  html += `<div class="chat-item-label">Assistente de Enfermagem</div>`;
+  
+  // Direcionamento
+  if (data.direcionamento === 'PS') {
+    html += `<div class="chat-ps">🚨 PRONTO-SOCORRO — ${data.motivo_direcionamento}</div>`;
+  } else {
+    html += `<div class="chat-section">`;
+    html += `<div class="chat-section-title">Direcionamento</div>`;
+    html += `<div style="font-size:13px;"><strong>${dir.label}</strong> — ${data.motivo_direcionamento}</div>`;
+    if (dir.url) {
+      html += `<button class="chat-link-pill" onclick="copyLink(this,'${dir.url}')">Copiar link ${dir.label}</button>`;
+    }
+    html += `</div>`;
+  }
+  
+  // Perguntas
+  if (data.perguntas && data.perguntas.length > 0) {
+    html += `<div class="chat-section" style="margin-top:10px;">`;
+    html += `<div class="chat-section-title">O que ainda perguntar</div>`;
+    html += data.perguntas.map(p => `<div style="font-size:13px;padding:4px 0;border-bottom:1px solid #e5e5e3;">→ ${p}</div>`).join('');
+    html += `</div>`;
+  }
+  
+  // Orientações
+  if (data.orientacoes) {
+    html += `<div class="chat-section" style="margin-top:10px;">`;
+    html += `<div class="chat-section-title">Orientações para o paciente</div>`;
+    html += `<div style="background:#f5f5f3;border-radius:8px;padding:10px;font-size:13px;line-height:1.7;white-space:pre-wrap;">${data.orientacoes}</div>`;
+    html += `<button class="chat-copy-btn" onclick="copiarTexto(this, \`${data.orientacoes.replace(/`/g,"'")}\`)">Copiar orientações</button>`;
+    html += `</div>`;
+  }
+  
+  // Medicações COFEN 801
+  if (data.medicacoes_cofen801 && data.medicacoes_cofen801.length > 0) {
+    html += `<div class="chat-section" style="margin-top:10px;">`;
+    html += `<div class="chat-section-title">Medicações — COFEN 801/2026</div>`;
+    html += `<div style="font-size:12px;color:#555;margin-bottom:6px;">Conforme protocolo institucional aprovado pela Pipo Saúde</div>`;
+    html += data.medicacoes_cofen801.map(m => `<div style="font-size:13px;padding:3px 0;">• ${m}</div>`).join('');
+    html += `<div style="font-size:11px;color:#888;margin-top:6px;"><a href="https://www.cofen.gov.br/resolucao-cofen-no-801-de-14-de-janeiro-de-2026/" target="_blank" style="color:#1a56b0;">Ver Resolução COFEN 801/2026</a></div>`;
+    html += `</div>`;
+  }
+  
+  // Sinais de alarme
+  if (data.sinais_alarme && data.sinais_alarme.length > 0) {
+    html += `<div class="chat-warning" style="margin-top:10px;">`;
+    html += `<strong>Sinais de alarme — ir ao PS se:</strong><br>`;
+    html += data.sinais_alarme.map(s => `• ${s}`).join('<br>');
+    html += `</div>`;
+  }
+  
+  // Alerta
+  if (data.alerta) {
+    html += `<div class="chat-ps" style="background:#fef3e2;color:#b7550a;margin-top:8px;">⚠️ ${data.alerta}</div>`;
+  }
+  
+  html += `<div style="font-size:10px;color:#aaa;margin-top:10px;border-top:1px solid #e5e5e3;padding-top:8px;">Conduta final é sempre responsabilidade do enfermeiro.</div>`;
+  html += `</div>`;
+  
+  hist.innerHTML += html;
+  hist.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}
+
+function renderErro() {
+  const hist = document.getElementById('chat-historico');
+  hist.innerHTML += `<div class="chat-item enfermeiro"><div class="alert alert-red">Erro de conexão. Tente novamente.</div></div>`;
+}
+
+function limparChat() {
+  historicoChat = [];
+  document.getElementById('chat-historico').innerHTML = '';
+  document.getElementById('msg-paciente').value = '';
+  document.getElementById('msg-continuacao').value = '';
+  document.getElementById('continuar-area').style.display = 'none';
+}
+
+function copiarTexto(btn, texto) {
+  navigator.clipboard.writeText(texto).then(() => {
+    btn.textContent = '✓ Copiado!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = 'Copiar orientações'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+
+</script>
+</body>
+</html>
