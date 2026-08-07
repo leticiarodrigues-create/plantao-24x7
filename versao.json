@@ -1,0 +1,15 @@
+{
+  "versao": "1.0.0",
+  "data": "2026-08-07",
+  "descricao": "Versão inicial com conteúdo extraído para JSON",
+  "arquivos": [
+    "content/versao.json",
+    "content/protocolos.json",
+    "content/operadoras.json",
+    "content/telefones.json",
+    "content/fluxos.json",
+    "content/links.json",
+    "content/ciap.json",
+    "content/orientacoes.json"
+  ]
+}

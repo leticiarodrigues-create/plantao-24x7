@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "Copiloto 24x7 — Pipo Saúde",
+  "version": "1.0.0",
+  "description": "Assistente operacional de enfermagem. Abre na lateral em qualquer site.",
+  "action": {
+    "default_title": "Abrir Copiloto 24x7"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  },
+  "permissions": [
+    "sidePanel",
+    "storage",
+    "clipboardWrite",
+    "identity"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "oauth2": {
+    "client_id": "917692028674-qhkhfet07rns18l78l57g08msiepdnr3.apps.googleusercontent.com",
+    "scopes": [
+      "https://www.googleapis.com/auth/drive.readonly",
+      "https://www.googleapis.com/auth/drive.file",
+      "email",
+      "profile"
+    ]
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/*.json"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}

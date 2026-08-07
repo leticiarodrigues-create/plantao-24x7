@@ -1,0 +1,29 @@
+{
+  "calendly": {
+    "leticia_defilippo_15": "https://calendly.com/leticiadefilippo/15mine61?&a2={{ticket.id}}",
+    "leticia_defilippo_30": "https://calendly.com/leticiadefilippo/teleconsulta-de-30-minutose61?&a2={{ticket.id}}",
+    "ana_carolina_15": "https://calendly.com/carolina-fuschini-piposaude/teleconsulta-de-15-minutos-ana-carolina03?&a2={{ticket.id}}",
+    "ana_carolina_30": "https://calendly.com/carolina-fuschini-piposaude/30min03?&a2={{ticket.id}}",
+    "rosiane_15": "https://calendly.com/rosiane-pinho-piposaude/teleconsulta-de-15-minutos-rosiane1254589?&a2={{ticket.id}}",
+    "rosiane_30": "https://calendly.com/rosiane-pinho-piposaude/30min1254589?&a2={{ticket.id}}",
+    "beatriz_15": "https://calendly.com/beatriz-sampaio-piposaude/teleconsulta-de-15-minutos-beatriz1015?&a2={{ticket.id}}",
+    "beatriz_30": "https://calendly.com/beatriz-sampaio-piposaude/30min6487?&a2={{ticket.id}}",
+    "rodizio_15": "https://calendly.com/d/cvf6-f7f-4ms/teleconsulta-medica-pipo-saude-1?&a2={{ticket.id}}",
+    "rodizio_30": "https://calendly.com/d/cxpv-k4h-8v5/teleconsulta-medica-pipo-saude-2?&a2={{ticket.id}}",
+    "enf_15": "https://calendly.com/d/d6g-j4x-9m8/equipe-de-enfermagem-15-min",
+    "enf_30": "https://calendly.com/d/d55-7c9-p8d/equipe-de-enfermagem-30-min"
+  },
+  "documentos": {
+    "mascaras": "https://docs.google.com/document/d/1oXsu1N6G0VuGZJlGx025zDJuHSllgxtDmU13UDBQzvk/edit?tab=t.0",
+    "ciap": "https://docs.google.com/document/d/1dnfS4a_Nm_MGZyBpNMbuMYIpGnmrAny02CpNF-dNDOg/edit",
+    "planilha_pinguim": "https://docs.google.com/spreadsheets/d/18zpqZIAVdgYT7ghqj_cUOKCg9RX3UE840lpTiOecklo/edit?gid=1854956680",
+    "manual_pinguim": "https://docs.google.com/document/d/1EFNMl8B3GQSj1TqaTNweb2eLVy61jjIkNAGjGF65zZk/edit",
+    "declaracao": "https://docs.google.com/document/d/1KnKVfQhYj6PgurHDOapXVacBtZLLXzksQMpu_J9knfc/edit?tab=t.0",
+    "copart_funcional": "https://docs.google.com/spreadsheets/d/18zpqZIAVdgYT7ghqj_cUOKCg9RX3UE840lpTiOecklo/edit?gid=2100279763",
+    "copart_pernod": "https://docs.google.com/spreadsheets/d/18zpqZIAVdgYT7ghqj_cUOKCg9RX3UE840lpTiOecklo/edit?gid=289366740"
+  },
+  "utilidades": {
+    "whatsapp_pipo": "(11) 94202-1122",
+    "site_pipo": "https://www.piposaude.com.br/"
+  }
+}

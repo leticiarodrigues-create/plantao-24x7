@@ -1,0 +1,88 @@
+{
+  "regras": [
+    {
+      "condicao": "hidratacao_insuficiente",
+      "tags": [
+        "insuficiente"
+      ],
+      "campo": "hidratacao",
+      "texto": "Aumentar ingestão hídrica (meta: ≥2L/dia)."
+    },
+    {
+      "condicao": "sedentarismo",
+      "tags": [
+        "sedent"
+      ],
+      "campo": "atividadeFisica",
+      "texto": "Incentivar prática de atividade física regular (≥150min/semana)."
+    },
+    {
+      "condicao": "tabagismo_ativo",
+      "tags": [
+        "fumante"
+      ],
+      "texto": "Orientar cessação do tabagismo. Disponibilizar suporte se necessário."
+    },
+    {
+      "condicao": "alcool_frequente",
+      "tags": [
+        "frequente"
+      ],
+      "campo": "alcool",
+      "texto": "Orientar redução do consumo de álcool e riscos associados."
+    },
+    {
+      "condicao": "constipacao",
+      "tags": [
+        "pris"
+      ],
+      "campo": "evacuacao",
+      "texto": "Incentivar dieta rica em fibras, hidratação adequada e atividade física."
+    },
+    {
+      "condicao": "insonia",
+      "tags": [
+        "insônia",
+        "insonia",
+        "não reparador"
+      ],
+      "campo": "sono",
+      "texto": "Orientar higiene do sono: horários regulares, reduzir telas antes de dormir."
+    },
+    {
+      "condicao": "gastrite",
+      "tags": [
+        "gastrite"
+      ],
+      "campo": "condicoes",
+      "texto": "Gastrite: evitar jejum prolongado, alimentos irritativos, álcool e AINE sem prescrição."
+    },
+    {
+      "condicao": "saude_mental",
+      "tags": [
+        "ansiedade",
+        "depressão",
+        "depressao"
+      ],
+      "campo": "condicoes",
+      "texto": "Reforçar acompanhamento com saúde mental. Pipo disponibiliza suporte psicológico."
+    },
+    {
+      "condicao": "hipertensao",
+      "tags": [
+        "hipertensão",
+        "hipertensao"
+      ],
+      "campo": "condicoes",
+      "texto": "Reforçar adesão ao tratamento anti-hipertensivo, dieta hipossódica e monitoramento de PA."
+    },
+    {
+      "condicao": "diabetes",
+      "tags": [
+        "diabetes"
+      ],
+      "campo": "condicoes",
+      "texto": "Reforçar controle glicêmico, adesão medicamentosa e dieta com baixo índice glicêmico."
+    }
+  ]
+}

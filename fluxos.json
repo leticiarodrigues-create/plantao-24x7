@@ -1,0 +1,26 @@
+[
+  {
+    "nome": "Como o membro aciona",
+    "desc": "Membro envia 'pipourgencia' no WhatsApp do Pipo Cuida → bot coleta contexto → Squadcast aciona o enfermeiro."
+  },
+  {
+    "nome": "Squadcast",
+    "desc": "Na ligação: digitar 1. No app: clicar Acknowledged. Link do ticket aparece → abrir no Zendesk → atender → marcar resolvido."
+  },
+  {
+    "nome": "Registro no Nilo",
+    "desc": "Todo atendimento clínico → registrar no Nilo. Tópico: Atendimento 24x7. Primeira pessoa. Caso administrativo → só no Zendesk."
+  },
+  {
+    "nome": "Acionar chefia",
+    "desc": "WhatsApp → aguardar 10min → ligar → sem resposta → WhatsApp de urgência."
+  },
+  {
+    "nome": "WhatsApp de urgência — quando usar",
+    "desc": "Bloqueio urgente, internação travada, médico não responde em 10min. NÃO usar para casos rotineiros."
+  },
+  {
+    "nome": "Passagem de plantão",
+    "desc": "Revisar todos os tickets abertos, sinalizar para colega e Aline os acionamentos do Squadcast."
+  }
+]

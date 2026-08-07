@@ -1,0 +1,71 @@
+[
+  {
+    "codigo": "A98",
+    "descricao": "Prevenção/rastreamento (check-up)",
+    "condicao": "eletiva"
+  },
+  {
+    "codigo": "K86",
+    "descricao": "Hipertensão sem complicações",
+    "tags": [
+      "hipertensão",
+      "hipertensao"
+    ]
+  },
+  {
+    "codigo": "T90",
+    "descricao": "Diabetes mellitus",
+    "tags": [
+      "diabetes"
+    ]
+  },
+  {
+    "codigo": "P74",
+    "descricao": "Ansiedade",
+    "tags": [
+      "ansiedade"
+    ]
+  },
+  {
+    "codigo": "P76",
+    "descricao": "Depressão",
+    "tags": [
+      "depressão",
+      "depressao"
+    ]
+  },
+  {
+    "codigo": "D86",
+    "descricao": "Gastrite/duodenite",
+    "tags": [
+      "gastrite"
+    ]
+  },
+  {
+    "codigo": "R97",
+    "descricao": "Rinite alérgica",
+    "tags": [
+      "rinite"
+    ]
+  },
+  {
+    "codigo": "N89",
+    "descricao": "Enxaqueca",
+    "tags": [
+      "enxaqueca"
+    ]
+  },
+  {
+    "codigo": "P06",
+    "descricao": "Distúrbio do sono",
+    "tags": [
+      "insônia",
+      "insonia"
+    ]
+  },
+  {
+    "codigo": "A04",
+    "descricao": "Fraqueza/cansaço geral",
+    "condicao": "espontanea"
+  }
+]
