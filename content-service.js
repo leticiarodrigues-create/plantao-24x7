@@ -7,7 +7,7 @@
 var ContentService = (function() {
 
   // URL base — vazio na Etapa 1 (local), GitHub raw na Etapa 2
-  var BASE_URL = '';  // ex: 'https://raw.githubusercontent.com/org/repo/main/'
+  var BASE_URL = 'https://raw.githubusercontent.com/leticiarodrigues-create/plantao-24x7/main/';
   var CACHE_TTL = 3600000; // 1 hora em ms
 
   var _cache = {};
